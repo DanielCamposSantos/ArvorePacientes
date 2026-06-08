@@ -1,13 +1,13 @@
-package io.github.danielcampossantos;
+package io.github.danielcampossantos.tests;
 
-import io.github.danielcampossantos.arvore.Arvore;
+import io.github.danielcampossantos.arvore.ArvoreImpl;
 import io.github.danielcampossantos.domain.Paciente;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Arvore arvore = new Arvore();
+        ArvoreImpl arvore = new ArvoreImpl();
 
         arvore.adicionar(Paciente.builder()
                 .numeroProntuario(1001)
@@ -54,5 +54,6 @@ public class Main {
                 .build()
         );
 
+        arvore.imprimir();
     }
 }
