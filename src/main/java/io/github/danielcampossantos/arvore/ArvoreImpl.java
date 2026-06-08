@@ -4,7 +4,6 @@ import io.github.danielcampossantos.domain.Paciente;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 
 @Getter
@@ -40,32 +39,40 @@ public class ArvoreImpl implements Arvore {
 
 
     @Override
-    public void imprimir() {
-        percorrer(raiz, Ordem.IN_ORDEM, no -> System.out.println(no.getValor()));
+    public void imprimirInOrdem() {
+        inOrdem(raiz);
+    }
+
+    @Override
+    public void imprimirPreOrdem() {
+        preOrdem(raiz);
+    }
+
+    @Override
+    public void imprimirPosOrdem() {
+        posOrdem(raiz);
     }
 
 
-    private void percorrer(No atual, Ordem ordem, Consumer<No> acao) {
+    private void inOrdem(No atual) {
         if (atual == null) return;
-        switch (ordem) {
-            case PRE_ORDEM -> {
-                acao.accept(atual);
-                percorrer(atual.getEsquerda(), ordem, acao);
-                percorrer(atual.getDireita(), ordem, acao);
-            }
+        inOrdem(atual.getEsquerda());
+        System.out.println(atual.getValor());
+        inOrdem(atual.getDireita());
+    }
 
-            case IN_ORDEM -> {
-                percorrer(atual.getEsquerda(), ordem, acao);
-                acao.accept(atual);
-                percorrer(atual.getDireita(), ordem, acao);
-            }
+    private void preOrdem(No atual) {
+        if (atual == null) return;
+        System.out.println(atual.getValor());
+        preOrdem(atual.getEsquerda());
+        preOrdem(atual.getDireita());
+    }
 
-            case POS_ORDEM -> {
-                percorrer(atual.getEsquerda(), ordem, acao);
-                percorrer(atual.getDireita(), ordem, acao);
-                acao.accept(atual);
-            }
-        }
+    private void posOrdem(No atual) {
+        if (atual == null) return;
+        posOrdem(atual.getEsquerda());
+        posOrdem(atual.getDireita());
+        System.out.println(atual.getValor());
     }
 
 
