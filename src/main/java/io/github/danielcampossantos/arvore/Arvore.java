@@ -3,7 +3,9 @@ package io.github.danielcampossantos.arvore;
 import io.github.danielcampossantos.domain.Paciente;
 
 public interface Arvore {
-    void imprimir();
+    void imprimirInOrdem();
+    void imprimirPosOrdem();
+    void imprimirPreOrdem();
 
     void adicionar(Paciente paciente);
 
