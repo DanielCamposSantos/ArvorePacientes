@@ -1,12 +1,21 @@
 package io.github.danielcampossantos.menu;
 
+import io.github.danielcampossantos.arvore.Arvore;
+import io.github.danielcampossantos.arvore.ArvoreImpl;
+import io.github.danielcampossantos.data.PacienteData;
+import io.github.danielcampossantos.domain.Paciente;
+
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Menu {
     private static final Scanner sc = new Scanner(System.in);
+    private static final Arvore arvore = new ArvoreImpl();
 
-    public static void menuInicial() {
-        while (true) {
+    public static void iniciar() {
+        PacienteData.carregarPacientes(arvore);
+        boolean rodar = true;
+        while (rodar) {
             System.out.println("""
                     ====================================
                             SISTEMA DE PACIENTES
@@ -18,21 +27,141 @@ public class Menu {
                     5 - Informações da Árvore
                     0 - Sair
                     """);
-            int op = sc.nextInt();
-
-            switch (op) {
-                case 1 -> imprimir();
-                case 2 -> imprimir();
-                case 3 -> imprimir();
-                case 4 -> imprimir();
-                case 5 -> imprimir();
-                case 0 -> imprimir();
-                default -> System.out.println("Invalido!");
-            }
+            rodar = escolhasMenu();
         }
+        sc.close();
+    }
+
+    private static boolean escolhasMenu() {
+        int op = sc.nextInt();
+        sc.nextLine();
+
+        switch (op) {
+            case 1 -> imprimir();
+            case 2 -> adicionar();
+            case 3 -> remover();
+            case 4 -> buscar();
+            case 5 -> informacoesArvore();
+            case 0 -> {
+                System.out.println("Encerrando o sistema...");
+                return false;
+            }
+            default -> System.err.println("""
+                    ==============================
+                            OPÇÃO INVÁLIDA
+                    ==============================
+                    """);
+        }
+        return true;
     }
 
     private static void imprimir() {
+        boolean voltar = true;
+        while (voltar) {
+            System.out.println("""
+                    ========================
+                            IMPRIMIR
+                    ========================
+                    1 - Ordem crescente
+                    2 - Pré-ordem
+                    3 - Pós-ordem
+                    0 - Voltar
+                    """);
+            voltar = escolhasImprimir();
+        }
+    }
 
+    private static boolean escolhasImprimir() {
+        int op = sc.nextInt();
+        sc.nextLine();
+
+        switch (op) {
+            case 1 -> {
+                System.out.println("\n=== IMPRESSÃO EM ORDEM CRESCENTE ===");
+                arvore.imprimirInOrdem();
+                System.out.println();
+            }
+            case 2 -> {
+                System.out.println("\n=== IMPRESSÃO EM PRÉ-ORDEM ===");
+                arvore.imprimirPreOrdem();
+                System.out.println();
+            }
+            case 3 -> {
+                System.out.println("\n=== IMPRESSÃO EM PÓS-ORDEM ===");
+                arvore.imprimirPosOrdem();
+                System.out.println();
+            }
+            case 0 -> {
+                return false;
+            }
+            default -> System.err.println("""
+                    ==============================
+                            OPÇÃO INVÁLIDA
+                    ==============================
+                    """);
+        }
+        return true;
+    }
+
+    private static void adicionar() {
+        System.out.println("\n=== ADICIONAR PACIENTE ===");
+
+        try {
+            System.out.print("Número do Prontuário: ");
+            int numeroProntuario = sc.nextInt();
+            sc.nextLine(); 
+
+            System.out.print("Nome Completo: ");
+            String nome = sc.nextLine();
+
+            System.out.print("Idade: ");
+            int idade = sc.nextInt();
+            sc.nextLine(); 
+
+            System.out.print("Especialidade: ");
+            String especialidade = sc.nextLine();
+
+            System.out.print("Data da Consulta (AAAA-MM-DD): ");
+            String dataString = sc.nextLine();
+            LocalDate dataConsulta = LocalDate.parse(dataString);
+
+            Paciente novoPaciente = new Paciente(
+                    numeroProntuario,
+                    nome,
+                    idade,
+                    especialidade,
+                    dataConsulta
+            );
+
+            arvore.adicionar(novoPaciente);
+
+            System.out.println("\n Paciente adicionado com sucesso!");
+            System.out.println(" Detalhes do paciente:");
+            System.out.println(novoPaciente);
+            System.out.println();
+
+        } catch (Exception e) {
+            System.err.println("\n Erro ao adicionar paciente!");
+            System.err.println("Verifique se os dados estão corretos.\n");
+            sc.nextLine(); 
+        }
+    }
+
+    private static void remover() {
+        System.out.println("\n=== REMOVER PACIENTE ===");
+        // TODO: Implementar lógica de remoção
+        System.out.println("Funcionalidade em desenvolvimento...\n");
+    }
+
+    private static void buscar() {
+        System.out.println("\n=== BUSCAR PACIENTE ===");
+        // TODO: Implementar lógica de busca
+        System.out.println("Funcionalidade em desenvolvimento...\n");
+    }
+
+    private static void informacoesArvore() {
+        System.out.println("\n=== INFORMAÇÕES DA ÁRVORE ===");
+        // TODO: Implementar lógica de informações
+        System.out.println("Funcionalidade em desenvolvimento...\n");
     }
 }

@@ -4,6 +4,6 @@ import io.github.danielcampossantos.menu.Menu;
 
 public class MenuTest01 {
     static void main() {
-        Menu.menuInicial();
+        Menu.iniciar();
     }
 }
