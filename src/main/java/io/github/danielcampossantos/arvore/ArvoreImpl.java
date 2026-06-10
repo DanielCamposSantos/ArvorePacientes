@@ -80,4 +80,12 @@ public class ArvoreImpl implements Arvore {
         return no.getValor().getNumeroProntuario();
     }
 
+    @Override
+    public int obterAltura() {
+        if (this.raiz == null) {
+            return 0;
+        }
+        return this.raiz.calcularAltura();
+    }
+
 }
