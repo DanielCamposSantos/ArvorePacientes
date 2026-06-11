@@ -11,4 +11,6 @@ public interface Arvore {
 
     void remover(int numeroProntuario);
 
+    Paciente buscar(int numeroProntuario);
+
 }

@@ -37,17 +37,6 @@ public class ArvoreImpl implements Arvore {
         }
     }
 
-
-    @Override
-    public void imprimirInOrdem() {
-        inOrdem(raiz);
-    }
-
-    @Override
-    public void imprimirPreOrdem() {
-        preOrdem(raiz);
-    }
-
     @Override
     public void remover(int numeroProntuario) {
         this.raiz = remover(this.raiz, numeroProntuario);
@@ -94,6 +83,45 @@ public class ArvoreImpl implements Arvore {
             no = no.getEsquerda();
         }
         return no;
+    }
+
+    @Override
+    public Paciente buscar(int numeroProntuario) {
+        No noEncontrado = buscar(this.raiz, numeroProntuario);
+
+        if (noEncontrado == null) {
+            return null;
+        }
+
+        return noEncontrado.getValor();
+    }
+
+    private No buscar(No atual, int numeroProntuario) {
+        if (atual == null) {
+            return null;
+        }
+
+        int prontuarioAtual = atual.getValor().getNumeroProntuario();
+
+        if (numeroProntuario == prontuarioAtual) {
+            return atual;
+        }
+
+        if (numeroProntuario < prontuarioAtual) {
+            return buscar(atual.getEsquerda(), numeroProntuario);
+        }
+
+        return buscar(atual.getDireita(), numeroProntuario);
+    }
+
+    @Override
+    public void imprimirInOrdem() {
+        inOrdem(raiz);
+    }
+
+    @Override
+    public void imprimirPreOrdem() {
+        preOrdem(raiz);
     }
 
     @Override
