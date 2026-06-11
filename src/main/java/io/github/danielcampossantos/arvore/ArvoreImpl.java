@@ -47,7 +47,7 @@ public class ArvoreImpl implements Arvore {
             return null;
         }
 
-        int prontuarioAtual = atual.getValor().getNumeroProntuario();
+        int prontuarioAtual = getNumeroProntuario(atual);
 
         if (numeroProntuario < prontuarioAtual) {
             atual.setEsquerda(remover(atual.getEsquerda(), numeroProntuario));
@@ -71,7 +71,7 @@ public class ArvoreImpl implements Arvore {
             atual.setValor(sucessor.getValor());
 
             atual.setDireita(
-                    remover(atual.getDireita(), sucessor.getValor().getNumeroProntuario())
+                    remover(atual.getDireita(), getNumeroProntuario(sucessor))
             );
         }
 
