@@ -151,6 +151,51 @@ public class ArvoreImpl implements Arvore {
         System.out.println(atual.getValor());
     }
 
+    @Override
+    public Paciente maiorProntuario() {
+        No maior = buscarMaior(raiz);
+
+        if (maior == null) {
+            return null;
+        }
+
+        return maior.getValor();
+    }
+
+    private No buscarMaior(No atual) {
+        if (atual == null) {
+            return null;
+        }
+
+        if (atual.getDireita() == null) {
+            return atual;
+        }
+
+        return buscarMaior(atual.getDireita());
+    }
+
+    @Override
+    public Paciente menorProntuario() {
+        No menor = buscarMenor(raiz);
+
+        if (menor == null) {
+            return null;
+        }
+
+        return menor.getValor();
+    }
+
+    private No buscarMenor(No atual) {
+        if (atual == null) {
+            return null;
+        }
+
+        if (atual.getEsquerda() == null) {
+            return atual;
+        }
+
+        return buscarMenor(atual.getEsquerda());
+    }
 
     private static int getNumeroProntuario(No no) {
         return no.getValor().getNumeroProntuario();

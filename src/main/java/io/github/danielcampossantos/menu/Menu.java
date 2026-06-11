@@ -207,7 +207,41 @@ public class Menu {
 
     private static void informacoesArvore() {
         System.out.println("\n=== INFORMAÇÕES DA ÁRVORE ===");
-        // TODO: Implementar lógica de informações
-        System.out.println("Funcionalidade em desenvolvimento...\n");
+        System.out.println("1 - Mostrar paciente com maior prontuário");
+        System.out.println("2 - Mostrar paciente com menor prontuário");
+        System.out.println("0 - Voltar");
+
+        int opcao = sc.nextInt();
+        sc.nextLine();
+
+        switch (opcao) {
+            case 1 -> {
+                Paciente maior = arvore.maiorProntuario();
+
+                if (maior == null) {
+                    System.out.println("Nenhum paciente cadastrado.\n");
+                } else {
+                    System.out.println("\nPaciente com maior prontuário:");
+                    System.out.println(maior);
+                    System.out.println();
+                }
+            }
+
+            case 2 -> {
+                Paciente menor = arvore.menorProntuario();
+
+                if (menor == null) {
+                    System.out.println("Nenhum paciente cadastrado.\n");
+                } else {
+                    System.out.println("\nPaciente com menor prontuário:");
+                    System.out.println(menor);
+                    System.out.println();
+                }
+            }
+
+            case 0 -> System.out.println("Voltando...\n");
+
+            default -> System.out.println("Opção inválida.\n");
+        }
     }
 }
