@@ -1,15 +1,47 @@
 package io.github.danielcampossantos.arvore;
 
 import io.github.danielcampossantos.domain.Paciente;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.util.function.Consumer;
-
-@Getter
-@Setter
 public class ArvoreImpl implements Arvore {
     private No raiz;
+
+
+    @Override
+    public void imprimirInOrdem() {
+        inOrdem(raiz);
+    }
+
+    @Override
+    public void imprimirPreOrdem() {
+        preOrdem(raiz);
+    }
+
+    @Override
+    public void imprimirPosOrdem() {
+        posOrdem(raiz);
+    }
+
+
+    private void inOrdem(No atual) {
+        if (atual == null) return;
+        inOrdem(atual.getEsquerda());
+        System.out.println(atual.getValor());
+        inOrdem(atual.getDireita());
+    }
+
+    private void preOrdem(No atual) {
+        if (atual == null) return;
+        System.out.println(atual.getValor());
+        preOrdem(atual.getEsquerda());
+        preOrdem(atual.getDireita());
+    }
+
+    private void posOrdem(No atual) {
+        if (atual == null) return;
+        posOrdem(atual.getEsquerda());
+        posOrdem(atual.getDireita());
+        System.out.println(atual.getValor());
+    }
 
 
     public void adicionar(Paciente paciente) {
@@ -67,7 +99,7 @@ public class ArvoreImpl implements Arvore {
                 return atual.getEsquerda();
             }
 
-            No sucessor = encontrarMenor(atual.getDireita());
+            No sucessor = encontrarMenorNaSubarvore(atual.getDireita());
             atual.setValor(sucessor.getValor());
 
             atual.setDireita(
@@ -78,7 +110,7 @@ public class ArvoreImpl implements Arvore {
         return atual;
     }
 
-    private No encontrarMenor(No no) {
+    private No encontrarMenorNaSubarvore(No no) {
         while (no.getEsquerda() != null) {
             no = no.getEsquerda();
         }
@@ -114,42 +146,6 @@ public class ArvoreImpl implements Arvore {
         return buscar(atual.getDireita(), numeroProntuario);
     }
 
-    @Override
-    public void imprimirInOrdem() {
-        inOrdem(raiz);
-    }
-
-    @Override
-    public void imprimirPreOrdem() {
-        preOrdem(raiz);
-    }
-
-    @Override
-    public void imprimirPosOrdem() {
-        posOrdem(raiz);
-    }
-
-
-    private void inOrdem(No atual) {
-        if (atual == null) return;
-        inOrdem(atual.getEsquerda());
-        System.out.println(atual.getValor());
-        inOrdem(atual.getDireita());
-    }
-
-    private void preOrdem(No atual) {
-        if (atual == null) return;
-        System.out.println(atual.getValor());
-        preOrdem(atual.getEsquerda());
-        preOrdem(atual.getDireita());
-    }
-
-    private void posOrdem(No atual) {
-        if (atual == null) return;
-        posOrdem(atual.getEsquerda());
-        posOrdem(atual.getDireita());
-        System.out.println(atual.getValor());
-    }
 
     @Override
     public Paciente maiorProntuario() {
