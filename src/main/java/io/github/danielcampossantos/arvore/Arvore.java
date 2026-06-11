@@ -9,4 +9,8 @@ public interface Arvore {
 
     void adicionar(Paciente paciente);
 
+    void remover(int numeroProntuario);
+
+    Paciente buscar(int numeroProntuario);
+
 }
