@@ -159,8 +159,6 @@ public class Menu {
         System.out.println("Funcionalidade em desenvolvimento...\n");
     }
 
-    // Funcionalidades 7 e 8
-
     private static void informacoesArvore() {
         System.out.println("\n=== INFORMAÇÕES DA ÁRVORE ===");
         System.out.println("1 - Mostrar paciente com maior prontuário");

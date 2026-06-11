@@ -9,8 +9,6 @@ public interface Arvore {
 
     void adicionar(Paciente paciente);
 
-    // Funcionalidades 7 e 8
-
     Paciente maiorProntuario();
 
     Paciente menorProntuario();

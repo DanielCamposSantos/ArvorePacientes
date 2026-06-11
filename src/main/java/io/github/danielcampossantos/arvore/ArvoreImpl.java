@@ -75,8 +75,6 @@ public class ArvoreImpl implements Arvore {
         System.out.println(atual.getValor());
     }
 
-    // Funcionalidades 7 e 8
-
     @Override
     public Paciente maiorProntuario() {
         No maior = buscarMaior(raiz);
