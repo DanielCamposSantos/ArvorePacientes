@@ -109,14 +109,14 @@ public class Menu {
         try {
             System.out.print("Número do Prontuário: ");
             int numeroProntuario = sc.nextInt();
-            sc.nextLine(); 
+            sc.nextLine();
 
             System.out.print("Nome Completo: ");
             String nome = sc.nextLine();
 
             System.out.print("Idade: ");
             int idade = sc.nextInt();
-            sc.nextLine(); 
+            sc.nextLine();
 
             System.out.print("Especialidade: ");
             String especialidade = sc.nextLine();
@@ -143,7 +143,7 @@ public class Menu {
         } catch (Exception e) {
             System.err.println("\n Erro ao adicionar paciente!");
             System.err.println("Verifique se os dados estão corretos.\n");
-            sc.nextLine(); 
+            sc.nextLine();
         }
     }
 
@@ -167,7 +167,7 @@ public class Menu {
 
             arvore.remover(numeroProntuario);
 
-            System.out.println("\nPaciente com prontuário " + numeroProntuario +" removido!");
+            System.out.println("\nPaciente com prontuário " + numeroProntuario + " removido!");
 
             System.out.println("\nLista de Pacientes Atualizada:");
             arvore.imprimirInOrdem();
@@ -209,7 +209,6 @@ public class Menu {
         System.out.println("\n=== INFORMAÇÕES DA ÁRVORE ===");
         System.out.println("1 - Mostrar paciente com maior prontuário");
         System.out.println("2 - Mostrar paciente com menor prontuário");
-        System.out.println("0 - Voltar");
 
         int opcao = sc.nextInt();
         sc.nextLine();
@@ -238,8 +237,6 @@ public class Menu {
                     System.out.println();
                 }
             }
-
-            case 0 -> System.out.println("Voltando...\n");
 
             default -> System.out.println("Opção inválida.\n");
         }
