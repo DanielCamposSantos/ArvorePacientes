@@ -149,14 +149,60 @@ public class Menu {
 
     private static void remover() {
         System.out.println("\n=== REMOVER PACIENTE ===");
-        // TODO: Implementar lógica de remoção
-        System.out.println("Funcionalidade em desenvolvimento...\n");
+
+        try {
+            System.out.println("\nLista de Pacientes:");
+            arvore.imprimirInOrdem();
+
+            System.out.print("Digite o número do prontuário que deseja remover: ");
+            int numeroProntuario = sc.nextInt();
+            sc.nextLine();
+
+            Paciente paciente = arvore.buscar(numeroProntuario);
+
+            if (paciente == null) {
+                System.out.println("\nPaciente com prontuário " + numeroProntuario + " não encontrado.\n");
+                return;
+            }
+
+            arvore.remover(numeroProntuario);
+
+            System.out.println("\nPaciente com prontuário " + numeroProntuario +" removido!");
+
+            System.out.println("\nLista de Pacientes Atualizada:");
+            arvore.imprimirInOrdem();
+
+            System.out.println();
+
+        } catch (Exception e) {
+            System.err.println("\nErro ao remover paciente!");
+            System.err.println("Digite um número de prontuário válido.\n");
+            sc.nextLine();
+        }
     }
 
     private static void buscar() {
         System.out.println("\n=== BUSCAR PACIENTE ===");
-        // TODO: Implementar lógica de busca
-        System.out.println("Funcionalidade em desenvolvimento...\n");
+
+        try {
+            System.out.print("Digite o número do prontuário: ");
+            int numeroProntuario = sc.nextInt();
+            sc.nextLine();
+
+            Paciente paciente = arvore.buscar(numeroProntuario);
+
+            if (paciente == null) {
+                System.out.println("\nPaciente com prontuário " + numeroProntuario + " não encontrado.\n");
+            } else {
+                System.out.println("\nPaciente encontrado:");
+                System.out.println(paciente);
+            }
+
+        } catch (Exception e) {
+            System.err.println("\nErro ao buscar paciente!");
+            System.err.println("Digite um número de prontuário válido.\n");
+            sc.nextLine();
+        }
     }
 
     private static void informacoesArvore() {

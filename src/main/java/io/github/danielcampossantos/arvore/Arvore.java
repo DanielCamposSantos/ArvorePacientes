@@ -12,6 +12,9 @@ public interface Arvore {
     Paciente maiorProntuario();
 
     Paciente menorProntuario();
+    void remover(int numeroProntuario);
+
+    Paciente buscar(int numeroProntuario);
 
 }
 

@@ -37,6 +37,82 @@ public class ArvoreImpl implements Arvore {
         }
     }
 
+    @Override
+    public void remover(int numeroProntuario) {
+        this.raiz = remover(this.raiz, numeroProntuario);
+    }
+
+    private No remover(No atual, int numeroProntuario) {
+        if (atual == null) {
+            return null;
+        }
+
+        int prontuarioAtual = getNumeroProntuario(atual);
+
+        if (numeroProntuario < prontuarioAtual) {
+            atual.setEsquerda(remover(atual.getEsquerda(), numeroProntuario));
+        } else if (numeroProntuario > prontuarioAtual) {
+            atual.setDireita(remover(atual.getDireita(), numeroProntuario));
+        } else {
+
+            if (atual.getEsquerda() == null && atual.getDireita() == null) {
+                return null;
+            }
+
+            if (atual.getEsquerda() == null) {
+                return atual.getDireita();
+            }
+
+            if (atual.getDireita() == null) {
+                return atual.getEsquerda();
+            }
+
+            No sucessor = encontrarMenor(atual.getDireita());
+            atual.setValor(sucessor.getValor());
+
+            atual.setDireita(
+                    remover(atual.getDireita(), getNumeroProntuario(sucessor))
+            );
+        }
+
+        return atual;
+    }
+
+    private No encontrarMenor(No no) {
+        while (no.getEsquerda() != null) {
+            no = no.getEsquerda();
+        }
+        return no;
+    }
+
+    @Override
+    public Paciente buscar(int numeroProntuario) {
+        No noEncontrado = buscar(this.raiz, numeroProntuario);
+
+        if (noEncontrado == null) {
+            return null;
+        }
+
+        return noEncontrado.getValor();
+    }
+
+    private No buscar(No atual, int numeroProntuario) {
+        if (atual == null) {
+            return null;
+        }
+
+        int prontuarioAtual = atual.getValor().getNumeroProntuario();
+
+        if (numeroProntuario == prontuarioAtual) {
+            return atual;
+        }
+
+        if (numeroProntuario < prontuarioAtual) {
+            return buscar(atual.getEsquerda(), numeroProntuario);
+        }
+
+        return buscar(atual.getDireita(), numeroProntuario);
+    }
 
     @Override
     public void imprimirInOrdem() {
