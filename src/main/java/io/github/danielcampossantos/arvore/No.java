@@ -15,23 +15,5 @@ public class No {
         this.valor = valor;
     }
 
-public int calcularAltura() {
-    int alturaEsquerda = 0;
-    int alturaDireita = 0;
-
-    if (this.esquerda != null) {
-        alturaEsquerda = this.esquerda.calcularAltura();
-    }
-
-    if (this.direita != null) {
-        alturaDireita = this.direita.calcularAltura();
-    }
-
-    if (alturaEsquerda > alturaDireita) {
-        return alturaEsquerda + 1;
-    } else {
-        return alturaDireita + 1;
-    }
-}
 
 }

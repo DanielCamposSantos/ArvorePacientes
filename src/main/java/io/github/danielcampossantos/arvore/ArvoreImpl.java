@@ -4,8 +4,6 @@ import io.github.danielcampossantos.domain.Paciente;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.function.Consumer;
-
 @Getter
 @Setter
 public class ArvoreImpl implements Arvore {
@@ -82,10 +80,17 @@ public class ArvoreImpl implements Arvore {
 
     @Override
     public int obterAltura() {
-        if (this.raiz == null) {
-            return 0;
+        return calcularAltura(this.raiz);
+    }
+
+    private int calcularAltura(No noAtual) {
+        if (noAtual == null) {
+            return -1;
         }
-        return this.raiz.calcularAltura();
+        int alturaEsquerda = calcularAltura(noAtual.getEsquerda());
+        int alturaDireita = calcularAltura(noAtual.getDireita());
+
+        return Math.max(alturaEsquerda, alturaDireita) + 1;
     }
 
 }
