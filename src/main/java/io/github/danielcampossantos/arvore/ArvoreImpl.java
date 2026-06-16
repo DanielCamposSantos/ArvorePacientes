@@ -197,4 +197,19 @@ public class ArvoreImpl implements Arvore {
         return no.getValor().getNumeroProntuario();
     }
 
+    @Override
+    public int obterAltura() {
+        return calcularAltura(this.raiz);
+    }
+
+    private int calcularAltura(No noAtual) {
+        if (noAtual == null) {
+            return -1;
+        }
+        int alturaEsquerda = calcularAltura(noAtual.getEsquerda());
+        int alturaDireita = calcularAltura(noAtual.getDireita());
+
+        return Math.max(alturaEsquerda, alturaDireita) + 1;
+    }
+
 }

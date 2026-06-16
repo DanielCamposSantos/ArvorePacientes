@@ -10,8 +10,7 @@ public class No {
     public No(Paciente valor) {
         this.valor = valor;
     }
-
-
+  
     public Paciente getValor() {
         return this.valor;
     }
