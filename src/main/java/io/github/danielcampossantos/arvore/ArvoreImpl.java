@@ -4,8 +4,6 @@ import io.github.danielcampossantos.domain.Paciente;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 public class ArvoreImpl implements Arvore {
     private No raiz;
 
