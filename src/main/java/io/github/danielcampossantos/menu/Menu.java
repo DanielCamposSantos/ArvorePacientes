@@ -33,6 +33,7 @@ public class Menu {
     }
 
     private static boolean escolhasMenu() {
+        System.out.print("Digite sua escolha: ");
         int op = sc.nextInt();
         sc.nextLine();
 
@@ -72,6 +73,7 @@ public class Menu {
     }
 
     private static boolean escolhasImprimir() {
+        System.out.print("Digite sua escolha: ");
         int op = sc.nextInt();
         sc.nextLine();
 
@@ -206,39 +208,67 @@ public class Menu {
     }
 
     private static void informacoesArvore() {
-        System.out.println("\n=== INFORMAÇÕES DA ÁRVORE ===");
-        System.out.println("1 - Mostrar paciente com maior prontuário");
-        System.out.println("2 - Mostrar paciente com menor prontuário");
+        boolean voltar = true;
+        while (voltar) {
+            System.out.println("""
+                    \n=== INFORMAÇÕES DA ÁRVORE ===
+                    1 - Mostrar paciente com maior prontuário
+                    2 - Mostrar paciente com menor prontuário
+                    3 - Mostrar altura da árvore
+                    0 - Voltar
+                    """);
+            System.out.print("Digite sua escolha: ");
+            int opcao = sc.nextInt();
+            sc.nextLine();
 
-        int opcao = sc.nextInt();
-        sc.nextLine();
+            switch (opcao) {
+                case 1 -> {
+                    Paciente maior = arvore.maiorProntuario();
 
-        switch (opcao) {
-            case 1 -> {
-                Paciente maior = arvore.maiorProntuario();
+                    if (maior == null) {
+                        System.out.println("Nenhum paciente cadastrado.\n");
+                    } else {
+                        System.out.println("\nPaciente com maior prontuário:");
+                        System.out.println(maior);
+                        System.out.println();
+                    }
+                }
 
-                if (maior == null) {
-                    System.out.println("Nenhum paciente cadastrado.\n");
-                } else {
-                    System.out.println("\nPaciente com maior prontuário:");
-                    System.out.println(maior);
+                case 2 -> {
+                    Paciente menor = arvore.menorProntuario();
+
+                    if (menor == null) {
+                        System.out.println("Nenhum paciente cadastrado.\n");
+                    } else {
+                        System.out.println("\nPaciente com menor prontuário:");
+                        System.out.println(menor);
+                        System.out.println();
+                    }
+                }
+
+                case 3 -> {
+                    int altura = arvore.obterAltura();
+                    System.out.println("\n=== ALTURA DA ÁRVORE ===");
+                    System.out.println("A altura da árvore é: " + altura);
+
+                    if (altura == 0) {
+                        System.out.println("(Árvore vazia)");
+                    } else if (altura == 1) {
+                        System.out.println("(Árvore com apenas a raiz)");
+                    }
                     System.out.println();
                 }
-            }
 
-            case 2 -> {
-                Paciente menor = arvore.menorProntuario();
-
-                if (menor == null) {
-                    System.out.println("Nenhum paciente cadastrado.\n");
-                } else {
-                    System.out.println("\nPaciente com menor prontuário:");
-                    System.out.println(menor);
-                    System.out.println();
+                case 0 -> {
+                    voltar = false;
                 }
-            }
 
-            default -> System.out.println("Opção inválida.\n");
+                default -> System.err.println("""
+                        ==============================
+                                OPÇÃO INVÁLIDA
+                        ==============================
+                        """);
+            }
         }
     }
 }
